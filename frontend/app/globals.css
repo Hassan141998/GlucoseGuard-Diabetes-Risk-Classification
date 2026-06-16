@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy-900: #0a0f1e;
+    --cyan-glow: #00d4ff;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #040810;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0a0f1e; }
+  ::-webkit-scrollbar-thumb { background: #00d4ff44; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #00d4ff88; }
+  ::selection { background: #00d4ff33; color: #00d4ff; }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-navy-900/60 backdrop-blur-md border border-white/5 rounded-2xl;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:border-cyan-glow/20 hover:shadow-cyan-glow;
+  }
+  .btn-primary {
+    @apply bg-cyan-glow text-navy-900 font-display font-bold px-6 py-3 rounded-xl
+           transition-all duration-200 hover:brightness-110 hover:shadow-cyan-glow
+           active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply border border-white/10 text-slate-300 font-display px-6 py-3 rounded-xl
+           transition-all duration-200 hover:border-cyan-glow/40 hover:text-cyan-glow
+           active:scale-95;
+  }
+  .input-field {
+    @apply bg-navy-800/80 border border-white/10 rounded-xl px-4 py-3
+           text-slate-100 placeholder-slate-500 font-mono text-sm
+           focus:outline-none focus:border-cyan-glow/60 focus:ring-1 focus:ring-cyan-glow/20
+           transition-all duration-200 w-full;
+  }
+  .label-text {
+    @apply text-xs font-mono text-slate-400 uppercase tracking-widest mb-1 block;
+  }
+  .section-title {
+    @apply font-display font-bold text-xl text-white mb-1;
+  }
+  .stat-value {
+    @apply font-mono text-2xl font-semibold text-cyan-glow;
+  }
+  .risk-badge-low      { @apply bg-risk-low/20 text-risk-low border border-risk-low/30; }
+  .risk-badge-moderate { @apply bg-risk-moderate/20 text-risk-moderate border border-risk-moderate/30; }
+  .risk-badge-high     { @apply bg-risk-high/20 text-risk-high border border-risk-high/30; }
+}
+
+/* Neural network canvas */
+#neural-canvas { position: absolute; inset: 0; pointer-events: none; }
+
+/* Gauge animation */
+.gauge-arc { transition: stroke-dashoffset 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* Shimmer loading */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, #0d1529 25%, #162240 50%, #0d1529 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Tab indicator */
+.tab-active { 
+  @apply text-cyan-glow border-b-2 border-cyan-glow;
+}
+
+/* Tooltip */
+.tooltip {
+  @apply absolute z-50 px-3 py-1.5 text-xs font-mono bg-navy-800 border border-white/10 
+         rounded-lg shadow-xl pointer-events-none whitespace-nowrap;
+}
